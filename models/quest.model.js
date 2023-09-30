@@ -1,7 +1,7 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize, Sequelize) {
     return sequelize.define("quests", {
       title: {
-        type: DataTypes.STRING(255),
+        type: Sequelize.STRING(255),
         allowNull: false,
         validate: {
           notEmpty: true,

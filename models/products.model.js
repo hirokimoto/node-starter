@@ -1,14 +1,14 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize, Sequelize) {
   return sequelize.define("products", {
     id: {
-      type: DataTypes.BIGINT,
+      type: Sequelize.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
       field: "id",
     },
     name: {
-      type: DataTypes.STRING(255),
+      type: Sequelize.STRING(255),
       allowNull: false,
       field: "name",
       validate: {
@@ -19,22 +19,12 @@ module.exports = function (sequelize, DataTypes) {
       },
     },
     price: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       field: "price",
       validate: {
         isDecimal: true
       },
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      field: "created_at",
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      field: "updated_at",
-    }
   });
 };
