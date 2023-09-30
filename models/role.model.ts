@@ -1,5 +1,4 @@
-import { Model, InferAttributes, InferCreationAttributes, CreationOptional, ForeignKey } from 'sequelize';
-import User from './user.model';
+import { Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 
 class Role extends Model<
   InferAttributes<Role>,
@@ -7,7 +6,6 @@ class Role extends Model<
 > {
   declare id: CreationOptional<number>;
   declare name: string;
-  declare userId: ForeignKey<User['id']>;
 
   // createdAt can be undefined during creation
   declare createdAt: CreationOptional<Date>;

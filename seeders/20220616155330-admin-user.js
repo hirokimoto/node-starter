@@ -10,16 +10,12 @@ module.exports = {
           name: "Administrator",
           email: "admin@radixweb.com",
           password: bcrypt.hashSync("password", 8),
-          createdAt: new Date(),
-          updatedAt: new Date(),
         },
         {
           username: "rahul",
           name: "Rahul",
           email: "rahul.radixweb@gmail.com",
           password: bcrypt.hashSync("password", 8),
-          createdAt: new Date(),
-          updatedAt: new Date(),
         },
       ],
       {}

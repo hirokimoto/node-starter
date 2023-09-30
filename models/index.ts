@@ -37,8 +37,9 @@ Product.init(
     updatedAt: DataTypes.DATE,
   },
   {
-    sequelize,
-    tableName: 'products'
+    tableName: 'products',
+    underscored: true,
+    sequelize
   }
 );
 
@@ -94,6 +95,7 @@ User.init(
   },
   {
     tableName: 'users',
+    underscored: true,
     sequelize
   }
 );
@@ -105,10 +107,6 @@ Role.init(
       autoIncrement: true,
       primaryKey: true
     },
-    userId: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false
-    },
     name: {
       type: new DataTypes.STRING(128),
       allowNull: false
@@ -118,6 +116,7 @@ Role.init(
   },
   {
     tableName: 'roles',
+    underscored: true,
     sequelize
   }
 );
@@ -128,8 +127,6 @@ User.hasMany(Product, {
   foreignKey: 'ownerId',
   as: 'products' // this determines the name in `associations`!
 });
-
-Role.belongsTo(User, { targetKey: 'id' });
 User.hasOne(Role, { sourceKey: 'id' });
 
 (async () => {
