@@ -14,8 +14,8 @@ module.exports = {
       follows: Sequelize.INTEGER,
       followers: Sequelize.INTEGER,
       role_id: Sequelize.INTEGER,
-      created_at: Sequelize.TIME,
-      updated_at: Sequelize.TIME
+      created_at: Sequelize.DATE,
+      updated_at: Sequelize.DATE
     });
   },
 
