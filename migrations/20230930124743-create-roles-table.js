@@ -4,7 +4,11 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('roles', {
-      id: Sequelize.INTEGER,
+      id: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        autoIncrement: true,
+        primaryKey: true
+      },
       name: Sequelize.STRING,
       created_at: Sequelize.DATE,
       updated_at: Sequelize.DATE
