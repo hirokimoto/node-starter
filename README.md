@@ -52,6 +52,9 @@ docker ps
 docker-compose down
 ```
 
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+
 * Refer API Docs : Link will be available soon
 
 <!-- ACKNOWLEDGEMENTS -->

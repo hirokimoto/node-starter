@@ -2,3 +2,4 @@
 .vscode
 google-*.json
 node_modules
+sequelize-data.json
