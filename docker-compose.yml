@@ -1,0 +1,79 @@
+version: '1'
+networks:
+  node-app:
+services:
+  node-webserver:
+    networks:
+      node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: Node-Webserver
+    restart: 'always'
+    working_dir: /home/node/app
+    depends_on:
+      - postgres
+    ports:
+      - ${HOST_MACHINE_UNSECURE_HOST_PORT-3000}:${NODE_APP_PORT-3000}
+      - 9229:9229
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=root
+    ports:
+      - "5432:5432"
+    volumes:
+      # When the PostgresSQL container is started it will run any scripts
+      # provided in the `docker-entrypoint-initdb.d` directory, this connects
+      # our seed file to that directory so that it gets run
+      - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+  # PostgreSQL pgAdmin panel accessible at http://localhost:16543/
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "placeholder@example.com"
+      PGADMIN_DEFAULT_PASSWORD: "fakepassword123!"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+  mysqldb:
+    networks:
+      node-app:
+    image: mariadb:10.6
+    container_name: Node-MySQL
+    env_file: ./.env
+    restart: 'unless-stopped'
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+      - ./docker/config/mysql:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD-deep70}
+      MYSQL_DATABASE: ${MYSQL_DATABASE-radixweb}
+      MYSQL_USER: ${MYSQL_USER-radixdev}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD-deep70}
+  phpmyadmin:
+    networks:
+      node-app:
+    image: phpmyadmin/phpmyadmin
+    container_name: Node-PMA
+    restart: 'unless-stopped'
+    depends_on:
+      - mysqldb
+    environment:
+      PMA_HOST: mysqldb
+      MYSQL_USER: ${MYSQL_USER-radixdev}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD-deep70}
+      UPLOAD_LIMIT: 3000M
+    ports:
+      - ${HOST_MACHINE_PMA_PORT-8082}:80
+volumes:
+  db-config:
+  db-data:
