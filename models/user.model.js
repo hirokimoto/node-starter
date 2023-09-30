@@ -28,6 +28,15 @@ module.exports = (sequelize, Sequelize) => {
         notEmpty: true,
       },
     },
+    avatar: {
+      type: Sequelize.STRING,
+    },
+    follows: {
+      type: Sequelize.INTEGER,
+    },
+    followers: {
+      type: Sequelize.INTEGER,
+    },
     source: {
       type: Sequelize.STRING,
     },
