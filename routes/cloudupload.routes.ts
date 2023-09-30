@@ -1,7 +1,7 @@
-const cloudUploadController = require("../controllers/cloudupload.controller");
-const upload = require("../middleware/upload");
-// File Upload Route
-module.exports = function (app) {
+import cloudUploadController from '../controllers/cloudupload.controller';
+import upload from '../middleware/upload';
+
+export default function (app) {
   app.post(
     "/api/uploadtogc",
     upload.array("file"),

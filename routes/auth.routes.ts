@@ -1,7 +1,8 @@
-const { verifySignUp } = require("../middleware");
-const authController = require("../controllers/auth.controller");
-const passport = require("passport");
-module.exports = function (app) {
+import passport from 'passport';
+import { verifySignUp } from '../middleware';
+import authController from '../controllers/auth.controller';
+
+export default function (app) {
   app.use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Headers",
@@ -20,10 +21,10 @@ module.exports = function (app) {
     authController.signup
   );
 
-  // API Authentication using JWT
+  // API authentication using JWT
   app.post("/api/auth/signin", authController.signin);
 
-  // Google Login
+  // Google login
   app.get(
     "/auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
@@ -35,8 +36,7 @@ module.exports = function (app) {
       failureRedirect: "/login",
     })
   );
-  // Google Login
-  // Facebook Login
+  // Facebook login
   app.get(
     "/auth/facebook",
     passport.authenticate("facebook", {
@@ -50,7 +50,7 @@ module.exports = function (app) {
       failureRedirect: "/login",
     })
   );
-  // Logout Handler
+  // Logout handler
   app.get("/logout", (req, res) => {
     req.logout();
   });

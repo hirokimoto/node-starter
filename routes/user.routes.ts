@@ -1,6 +1,7 @@
-const { authJwt } = require("../middleware");
-const userController = require("../controllers/user.controller");
-module.exports = function (app) {
+import { authJwt } from '../middleware';
+import userController from '../controllers/user.controller';
+
+export default function (app) {
   app.get("/api/public", userController.publicAccess);
   app.get("/api/user", [authJwt.verifyToken], userController.userAccess);
   app.get(
