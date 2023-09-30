@@ -1,5 +1,5 @@
 import { authJwt } from '../middleware';
-import userController from '../controllers/user.controller';
+import * as userController from '../controllers/user.controller';
 
 export default function (app) {
   app.get("/api/public", userController.publicAccess);

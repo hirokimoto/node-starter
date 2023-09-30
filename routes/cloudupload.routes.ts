@@ -1,4 +1,4 @@
-import cloudUploadController from '../controllers/cloudupload.controller';
+import * as cloudUploadController from '../controllers/cloudupload.controller';
 import upload from '../middleware/upload';
 
 export default function (app) {

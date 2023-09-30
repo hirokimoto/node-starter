@@ -1,12 +1,14 @@
-const db = require("../models");
-const config = require("../config/auth.config");
+import { Op } from 'sequelize';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import db from '../models';
+import config from '../config/auth.config';
+import mailer from '../utils/nodemailer';
+
 const User = db.users;
 const Role = db.roles;
-const Op = db.Sequelize.Op;
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const mailer = require("../utils/nodemailer");
-exports.signup = (req, res) => {
+
+export const signup = (req, res) => {
   // Save User to Database
   User.create({
     username: req.body.username,
@@ -38,7 +40,8 @@ exports.signup = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
-exports.signin = (req, res) => {
+
+export const signin = (req, res) => {
   User.findOne({
     where: {
       username: req.body.username,
@@ -61,7 +64,7 @@ exports.signin = (req, res) => {
       let token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
-      let authorities = [];
+      let authorities: string[] = [];
       user.getRoles().then((roles) => {
         for (let i = 0; i < roles.length; i++) {
           authorities.push("ROLE_" + roles[i].name.toUpperCase());

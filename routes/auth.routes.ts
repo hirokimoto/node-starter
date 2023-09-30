@@ -1,6 +1,6 @@
 import passport from 'passport';
 import { verifySignUp } from '../middleware';
-import authController from '../controllers/auth.controller';
+import * as authController from '../controllers/auth.controller';
 
 export default function (app) {
   app.use(function (req, res, next) {

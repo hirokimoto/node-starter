@@ -1,8 +1,8 @@
-const db = require("../models");
+import db from '../models';
 const Product = db.products;
 
 // Add Product
-exports.addProduct = (req, res) => {
+export const addProduct = (req, res) => {
   // Create a Product
   const product = {
     name: req.body.name,
@@ -21,7 +21,7 @@ exports.addProduct = (req, res) => {
 };
 
 // Get All Products
-exports.getAllProducts = (req, res) => {
+export const getAllProducts = (req, res) => {
   // Get All products
   Product.findAll()
     .then((products) => {
@@ -36,7 +36,7 @@ exports.getAllProducts = (req, res) => {
 };
 
 // Get Single Product By ID
-exports.getProduct = (req, res) => {
+export const getProduct = (req, res) => {
   const id = req.params.id;
   Product.findByPk(id)
     .then((data) => {
@@ -56,7 +56,7 @@ exports.getProduct = (req, res) => {
 };
 
 // Delete Product by ID
-exports.deleteProduct = (req, res) => {
+export const deleteProduct = (req, res) => {
   const id = req.params.id;
   Product.destroy({
     where: { id: id },
@@ -78,8 +78,9 @@ exports.deleteProduct = (req, res) => {
       });
     });
 };
+
 // Update Product Details
-exports.updateProduct = (req, res) => {
+export const updateProduct = (req, res) => {
   const id = req.params.id;
   Product.update(req.body, {
     where: { id: id },

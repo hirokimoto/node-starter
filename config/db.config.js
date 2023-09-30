@@ -17,14 +17,18 @@ module.exports = {
     database: process.env.POSTGRESQL_DATABASE,
     host: process.env.POSTGRESQL_HOST,
     logging: false,
-    dialect: "mysql",
+    dialect: "postgres",
     dialectOptions: {
       bigNumberStrings: true,
     },
   },
   production: {
-    use_env_variable: "DATABASE_URL",
-    dialect: "mysql",
+    username: process.env.POSTGRESQL_USER,
+    password: process.env.POSTGRESQL_PASSWORD,
+    database: process.env.POSTGRESQL_DATABASE,
+    host: process.env.POSTGRESQL_HOST,
+    logging: false,
+    dialect: "postgres",
     logging: false,
     dialectOptions: {
       bigNumberStrings: true,

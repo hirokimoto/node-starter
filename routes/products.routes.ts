@@ -1,5 +1,5 @@
 import { authJwt } from '../middleware';
-import productController from '../controllers/products.controller';
+import * as productController from '../controllers/products.controller';
 
 export default function (app) {
   app.post(
