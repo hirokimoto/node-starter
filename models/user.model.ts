@@ -19,7 +19,6 @@ class User extends Model<InferAttributes<User, { omit: 'roles' }>, InferCreation
   declare follows: number | null;
   declare followers: number | null;
   declare roleId: ForeignKey<Role['id']>;;
-  declare source: string | null;
 
   // timestamps!
   // createdAt can be undefined during creation

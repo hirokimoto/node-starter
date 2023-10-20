@@ -86,10 +86,6 @@ User.init(
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    source: {
-      type: new DataTypes.STRING(128),
-      allowNull: true
-    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   },
